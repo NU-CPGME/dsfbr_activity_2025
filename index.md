@@ -85,14 +85,13 @@ module load mamba
 conda activate /projects/e30682/MicrobialWGS/conda_envs/assembly_env
 ```
 
-  * <img src="img/warn.png" width="25"> If this is the first time you've used Mamba or Conda on Quest, you'll probably get an error message here. The following commands will get it working for you, after which you can rerun the command *b2* above. You'll only need to run these two commands once and Conda/Mamba should work for you every time you use them on Quest going forward.
+> <img src="img/warn.png" width="25"> If this is the first time you've used Mamba or Conda on Quest, you'll probably get an error message here. The following commands will get it working for you, after which you can rerun the command *b2* above. You'll only need to run these two commands once and Conda/Mamba should work for you every time you use them on Quest going forward.
+> ```
+> conda init bash
+> source ~/.bashrc
+> ```
 
-```
-conda init bash
-source ~/.bashrc
-```
-
-  * <img src="img/warn.png" width="25"> If you wanted to recreate this environment in your home directory or on your own computer, you can copy the `assembly_environment.yaml` file from the `/projects/e30682/MicrobialWGS/conda_envs` directory and create the environment using the `mamba env create -f assembly_environment.yaml` command. 
+> <img src="img/warn.png" width="25"> If you want to recreate this environment in your home directory or on your own computer, you can copy the `assembly_environment.yaml` file from the `/projects/e30682/MicrobialWGS/conda_envs` directory and create the environment using the `mamba env create -f assembly_environment.yaml` command. 
 
 
 ### 2. Perform quality trimming of the sequencing reads
@@ -139,8 +138,7 @@ Files | Description
 Now we'll generate a _de novo_ whole genome assembly from our trimmed reads. For this we'll use the assembler [SPAdes](https://cab.spbu.ru/software/spades/) ([Github site](https://github.com/ablab/spades)).  
 
 
-> [!WARNING] 
-> This step takes too many resources and is too slow to do in the login node. We'll submit a Slurm batch script for this instead.
+> <img src="img/warn.png" width="25"> This step takes too many resources and is too slow to do in the login node. We'll submit a Slurm batch script for this instead.
 
 ```
 nano spades.sh
@@ -174,7 +172,13 @@ spades.py \
 
 ```
 
-Close and save the document, then submit the job request: `sbatch spades.sh`
+To close and save the document, first type `Ctrl + x` to exit, then `y`, then hit `Enter` to save the file with the same name.
+
+To submit the job request, type: 
+
+```
+sbatch spades.sh
+```
 
 **Outputs**
 
@@ -231,9 +235,9 @@ Results will be summarized in the `SA.checkm_results.txt` file. The ones to pay 
 
 From the [CheckM wiki](https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics#qa):
 
-> * completeness: estimated completeness of genome as determined from the presence/absence of marker genes and the expected collocalization of these genes.
-> * contamination: estimated contamination of genome as determined by the presence of multi-copy marker genes and the expected collocalization of these genes.
-> * strain heterogeneity: estimated strain heterogeneity as determined from the number of multi-copy marker pairs which exceed a specified amino acid identity threshold (default = 90%). High strain heterogeneity suggests the majority of reported contamination is from one or more closely related organisms (i.e. potentially the same species), while low strain heterogeneity suggests the majority of contamination is from more phylogenetically diverse sources.
+* completeness: estimated completeness of genome as determined from the presence/absence of marker genes and the expected collocalization of these genes.
+* contamination: estimated contamination of genome as determined by the presence of multi-copy marker genes and the expected collocalization of these genes.
+* strain heterogeneity: estimated strain heterogeneity as determined from the number of multi-copy marker pairs which exceed a specified amino acid identity threshold (default = 90%). High strain heterogeneity suggests the majority of reported contamination is from one or more closely related organisms (i.e. potentially the same species), while low strain heterogeneity suggests the majority of contamination is from more phylogenetically diverse sources.
 
 ## 5. Assembly quality assessment - part 2: Quast
 
