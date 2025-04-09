@@ -14,7 +14,7 @@ In this exercise we will assemble the whole genome sequence of an isolate of the
 
 We will perform all these tasks on Quest using Conda / Mamba. For a nice introduction to Conda, see [here](https://www.dataschool.io/intro-to-conda-environments/) or [here](https://docs.conda.io/projects/conda/en/latest/index.html) for more detail. For more information about using Mamba or Conda on Quest specifically, take a look at [this page](https://services.northwestern.edu/TDClient/30/Portal/KB/ArticleDet?ID=2064).
 
-  * <img src="img/warn.png" width="25"> You can also install Mamba or Conda on your personal computer (all of the analyses in this exercise can easily be done on a laptop). I recommend Mamba or Micromamba as the installation of software packages into environments with Mamba tends to be much faster and smoother than with Conda or Anaconda. See [here](https://mamba.readthedocs.io/en/latest/installation/mamba-installation.html) for more information on installing Mamba or Micromamba. If you install Conda and/or Mamba on you computer you do not need to load it as a module.  
+> <img src="img/warn.png" width="25"> You can also install Mamba or Conda on your personal computer (all of the analyses in this exercise can easily be done on a laptop). I recommend Mamba or Micromamba as the installation of software packages into environments with Mamba tends to be much faster and smoother than with Conda or Anaconda. See [here](https://mamba.readthedocs.io/en/latest/installation/mamba-installation.html) for more information on installing Mamba or Micromamba. If you install Conda and/or Mamba on you computer you do not need to load it as a module.  
 
 ### Software to install: 
 
@@ -180,6 +180,12 @@ To submit the job request, type:
 sbatch spades.sh
 ```
 
+To check if your job is queued, running, or finished, you can use the following command:
+
+```
+squeue --me
+```
+
 **Outputs**
 
 All of the output files can be found in the `SA_spades` folder. There are a lot of files in there, so we're just going to pick a few of the most relevant to describe.
@@ -285,7 +291,11 @@ Files | Description
 _Commands_
 
 ```Shell
-amrfinder -n SA_spades/contigs.fasta -O Staphylococcus_aureus --plus --threads 1 --output SA_amrfinder.txt
+amrfinder -n SA_spades/contigs.fasta \
+  -O Staphylococcus_aureus \
+  --plus \
+  --threads 1 \
+  --output SA_amrfinder.txt
 ```
 
 _Settings Used_
