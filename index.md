@@ -323,7 +323,7 @@ Files | Description
 **Commands**
 
 ```
-nano checkm.sh
+nano snippy.sh
 ```
 
 *snippy.sh*
